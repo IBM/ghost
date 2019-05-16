@@ -1,18 +1,15 @@
 defmodule Ghost do
-  @moduledoc """
-  Documentation for Ghost.
-  """
+  @config Application.get_env(:ghost, __MODULE__)
 
-  @doc """
-  Hello world.
+  def produce_sync(topic, key, message) do
+    client  = Keyword.get(@config, :client)
+    adapter = Keyword.get(@config, :adapter)
+    adapter.produce_sync(client, topic, key, message)
+  end
 
-  ## Examples
-
-      iex> Ghost.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def produce(topic, key, message) do
+    client  = Keyword.get(@config, :client)
+    adapter = Keyword.get(@config, :adapter)
+    adapter.produce(client, topic, key, message)
   end
 end
