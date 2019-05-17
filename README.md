@@ -1,10 +1,10 @@
-# Ghost
+# 👻Ghost
 
-**TODO: Add description**
+At IBM many of our internal cloud services connect via a kafka based service bus. While this allows our developers to easily exchange information, it makes testing these services extremely difficult as Kafka is neither transactional nor synchronous. Your service may publish a message to kafka, but it can take an indeterminate amount of time to read that message back. Which is why we developed Ghost.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
+If [available in Hex](https://hexdocs.pm/ghost), the package can be installed
 by adding `ghost` to your list of dependencies in `mix.exs`:
 
 ```elixir
@@ -14,8 +14,3 @@ def deps do
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ghost](https://hexdocs.pm/ghost).
-
