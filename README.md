@@ -20,12 +20,18 @@ At IBM many of our internal cloud services connect via a kafka based service bus
 
 Ghost aims to offer the same kind testing experience as Ecto provides for databases via the `Ecto.Adapter.Sandbox`.
 
+## How to use it?
+
+
+
 ## How does it work?
+
+Every adapter must implement the `Ghost.Queue` behavior which includes 2 synchronous produce APIs, 2 async produce APIs, and one fetch API. Any new adapters simply implement the API and the implementation can be provided in the configuration.
 
 ```elixir
 defmodule Ghost.Queue do
   @doc """
-  The `produce_sync/5` function will add a value to the topic and partition syncronously.
+  The `produce_sync/5` function will add a value to the topic and partition synchronously.
   """
   @callback produce_sync(
               atom() | pid(),
@@ -41,8 +47,8 @@ defmodule Ghost.Queue do
   @callback produce_sync(atom() | pid(), String.t(), binary(), binary()) :: {:ok, integer()} | {:error, any()}
 
   @doc """
-  This is an asyncrounous produce to the queue. This function will send a message to the caller
-  of a format specified by the specific implenation of `Queue`.
+  This is an asynchronous produce to the queue. This function will send a message to the caller
+  of a format specified by the specific implementation of `Queue`.
   """
   @callback produce(
               atom() | pid(),
