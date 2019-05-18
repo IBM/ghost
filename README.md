@@ -32,7 +32,7 @@ config :ghost, Ghost,
   adapter: Ghost.VirtualQueue
 ```
 
-At IBM we have our `dev.exs` and `prod.exs` file configured somewhat like this
+At IBM we have both our `dev.exs` and `prod.exs` file configured somewhat like this, the host name for Kafka obviously changes between deploys, but in general that's what it looks like for both files. You configure brod to make sure you can connect to kafka in a prod environment, and specify that the implementation of Ghost you would like to use is the Kafka backend.
 
 ```elixir
 config :brod,
@@ -51,14 +51,14 @@ config :ghost, Ghost,
   client: :brod_client # notice this value is equal to the brod config
 ```
 
-This configuration uses `brod` for the `Ghost` implementation and you would use it like this,
+This configuration uses `brod` for the `Ghost` implementation and you would use it like this
 
 ```elixir
 iex(1)> Ghost.produce_sync("kafka_topic_name", "key", "payload")
 {:ok, 0}
 ```
 
-, which will place the message "payload" on the "kafka_topic_name" topic with key set to "key". This a production and dev configuration where we actually want to produce messages to Kafka.
+Which will place the __message__  `"payload"` on the `"kafka_topic_name"`️ __topic__ with __key__ set to `"key"`. This a production and dev configuration where we actually want to produce messages to Kafka.
 
 ### Testing Usage
 
