@@ -1,7 +1,5 @@
 # 👻Ghost
 
-[Available in Hex](https://hexdocs.pm/ghost)
-
 The package can be installed
 by adding `ghost` to your list of dependencies in `mix.exs`:
 
@@ -13,6 +11,9 @@ def deps do
   ]
 end
 ```
+
+[Available in Hex](https://hexdocs.pm/ghost)
+
 
 ## Introduction
 
