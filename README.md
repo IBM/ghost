@@ -1,8 +1,8 @@
 # 👻Ghost
 
-## Installation
+[Available in Hex](https://hexdocs.pm/ghost)
 
-If [available in Hex](https://hexdocs.pm/ghost), the package can be installed
+The package can be installed
 by adding `ghost` to your list of dependencies in `mix.exs`:
 
 ```elixir
