@@ -63,6 +63,17 @@ Which will place the __message__  `"payload"` on the `"kafka_topic_name"`️ __t
 
 ### Testing Usage
 
+In the testing configuration we only need to add the following to our `test.exs`.
+
+```elixir
+config :ghost, Ghost,
+  queue_adapter: Ghost.VirtualQueue,
+  client: nil
+```
+
+In this case we don't need to configure brod since in the test case we won't actually be producing messages to Kafka.
+
+
 ## How does it work?
 
 Every adapter must implement the `Ghost.Queue` behavior which includes 2 synchronous produce APIs, 2 async produce APIs, and one fetch API. Any new adapters simply implement the API and the implementation can be provided in the configuration.
