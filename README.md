@@ -22,6 +22,8 @@ Ghost aims to offer the same kind testing experience as Ecto provides for databa
 
 ## How to use it?
 
+### Production and Dev Usage
+
 Out of the box `Ghost` provides a default module (`Ghost`) that changes it's implementation based on configuration options. These configuration options are as follows
 
 ```elixir
@@ -35,7 +37,7 @@ At IBM we have our `dev.exs` and `prod.exs` file configured somewhat like this
 ```elixir
 config :brod,
   clients: [
-    brod_client: [
+    brod_client: [ # notice this key is equal to client in ghost
       endpoints: [
         {'kafka.dev', 9_095}
       ],
@@ -46,10 +48,19 @@ config :brod,
 
 config :ghost, Ghost,
   queue_adapter: Ghost.Kafka,
-  client: :brod_client
+  client: :brod_client # notice this value is equal to the brod config
 ```
 
-This configuration uses `brod`  
+This configuration uses `brod` for the `Ghost` implementation and you would use it like this,
+
+```elixir
+iex(1)> Ghost.produce_sync("kafka_topic_name", "key", "payload")
+{:ok, 0}
+```
+
+, which will place the message "payload" on the "kafka_topic_name" topic with key set to "key". This a production and dev configuration where we actually want to produce messages to Kafka.
+
+### Testing Usage
 
 ## How does it work?
 
