@@ -9,7 +9,7 @@ by adding `ghost` to your list of dependencies in `mix.exs`:
 def deps do
   [
     {:ghost, "~> 0.1.0"},
-    {:brod, "~> 3.7"}
+    {:brod, "~> 3.7"} # Only add if you want to use brod for your Kafka client
   ]
 end
 ```
@@ -22,7 +22,34 @@ Ghost aims to offer the same kind testing experience as Ecto provides for databa
 
 ## How to use it?
 
+Out of the box `Ghost` provides a default module (`Ghost`) that changes it's implementation based on configuration options. These configuration options are as follows
 
+```elixir
+config :ghost, Ghost,
+  client: :brod_client,
+  adapter: Ghost.VirtualQueue
+```
+
+At IBM we have our `dev.exs` and `prod.exs` file configured somewhat like this
+
+```elixir
+config :brod,
+  clients: [
+    brod_client: [
+      endpoints: [
+        {'kafka.dev', 9_095}
+      ],
+      reconnect_cool_down_seconds: 10,
+      auto_start_producers: true
+    ]
+  ]
+
+config :ghost, Ghost,
+  queue_adapter: Ghost.Kafka,
+  client: :brod_client
+```
+
+This configuration uses `brod`  
 
 ## How does it work?
 
